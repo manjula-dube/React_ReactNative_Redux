@@ -1,0 +1,19 @@
+{
+  "name": "callmestack",
+  "version": "1.0.0",
+  "description": "\"github example\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manjula91/React_ReactNative_Redux.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manjula91/React_ReactNative_Redux/issues"
+  },
+  "homepage": "https://github.com/manjula91/React_ReactNative_Redux#readme"
+}
