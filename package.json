@@ -1,0 +1,13 @@
+{
+	"name": "callmestack",
+	"version": "1.0.0",
+	"description": "\"github example\"",
+	"private": true,
+	"dependencies": {
+		"redux": "^3.7.2"
+	},
+	"bugs": {
+		"url": "https://github.com/manjula91/React_ReactNative_Redux/issues"
+	},
+	"homepage": "https://github.com/manjula91/React_ReactNative_Redux#readme"
+}
