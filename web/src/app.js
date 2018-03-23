@@ -5,11 +5,11 @@ import UserInfo from './components/user-info'
 import Repositories from './components/repositories'
 
 class App extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = { data: {} }
   }
-  render() {
+  render () {
     return (
       <div>
         <Header />
@@ -20,7 +20,7 @@ class App extends React.Component {
             avatar={this.props.data.avatar}
             url={this.props.data.url}
             description={this.props.data.description}
-          />
+                    />
           <Repositories repos={this.props.data.repos} />
         </div>
       </div>

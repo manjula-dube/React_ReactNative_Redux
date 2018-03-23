@@ -22,6 +22,8 @@
     "redux": "file://../redux"
   },
   "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-plugin-react": "^7.7.0",
     "react-scripts": "1.0.13"
   },
   "bugs": {
