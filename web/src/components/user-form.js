@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { get } from '../data-fetcher'
-import { setBusy, storeResult } from '../actions'
+import { setBusy, storeResult } from '../action'
 
 class UserForm extends React.Component {
   constructor (props) {

@@ -4,7 +4,8 @@
   "description": "\"github example\"",
   "main": "index.js",
   "scripts": {
-    "start": "react-scripts start"
+    "start": "react-scripts start",
+    "preinstall": "npm link redux-store"
   },
   "repository": {
     "type": "git",
@@ -19,11 +20,9 @@
     "react-dom": "15.6.1",
     "react-router-dom": "^4.2.2",
     "react-redux": "^5.0.7",
-    "redux": "file://../redux"
+    "redux-store": "1.0.0"
   },
   "devDependencies": {
-    "eslint": "^4.19.1",
-    "eslint-plugin-react": "^7.7.0",
     "react-scripts": "1.0.13"
   },
   "bugs": {
