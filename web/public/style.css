@@ -129,3 +129,18 @@ img.avatar {
 .busy {
   opacity: 0.2;
 }
+
+.repo-table {
+  display: table;
+}
+
+.repo-row {
+  display:table-row;
+}
+
+.repo-cell{
+  display: table-cell;
+  border:1px solid #eaeaea;
+  padding:18px;
+  border-collapse: collapse;
+}
