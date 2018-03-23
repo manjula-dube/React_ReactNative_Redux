@@ -1,31 +1,32 @@
 {
-  "name": "callmestack",
-  "version": "1.0.0",
-  "description": "\"github example\"",
-  "main": "index.js",
-  "scripts": {
-    "start": "react-scripts start"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/manjula91/React_ReactNative_Redux.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "private": true,
-  "dependencies": {
-    "axios": "0.16.2",
-    "react": "15.6.1",
-    "react-dom": "15.6.1",
-    "react-router-dom": "^4.2.2",
-    "react-redux": "^5.0.7",
-    "redux": "file://../redux"
-  },
-  "devDependencies": {
-    "react-scripts": "1.0.13"
-  },
-  "bugs": {
-    "url": "https://github.com/manjula91/React_ReactNative_Redux/issues"
-  },
-  "homepage": "https://github.com/manjula91/React_ReactNative_Redux#readme"
+	"name": "callmestack",
+	"version": "1.0.0",
+	"description": "\"github example\"",
+	"main": "index.js",
+	"scripts": {
+		"start": "react-scripts start",
+		"preinstall": "npm link redux-store"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/manjula91/React_ReactNative_Redux.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"private": true,
+	"dependencies": {
+		"axios": "0.16.2",
+		"react": "15.6.1",
+		"react-dom": "15.6.1",
+		"react-router-dom": "^4.2.2",
+		"react-redux": "^5.0.7",
+		"redux-store": "1.0.0"
+	},
+	"devDependencies": {
+		"react-scripts": "1.0.13"
+	},
+	"bugs": {
+		"url": "https://github.com/manjula91/React_ReactNative_Redux/issues"
+	},
+	"homepage": "https://github.com/manjula91/React_ReactNative_Redux#readme"
 }

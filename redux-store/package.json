@@ -1,0 +1,10 @@
+{
+	"name": "redux-store",
+	"version": "1.0.0",
+	"scripts": {
+		"make-global": "npm link"
+	},
+	"dependencies": {
+		"redux": "^3.7.2"
+	}
+}
