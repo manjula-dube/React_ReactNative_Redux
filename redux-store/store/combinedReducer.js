@@ -10,4 +10,6 @@ const initialReducer = {
 }
 
 // Combine all reducers using redux API
-export default combineReducers(initialReducer)
+const createReducer = () => combineReducers(initialReducer)
+
+export default createReducer
