@@ -24,9 +24,5 @@
   },
   "devDependencies": {
     "react-scripts": "1.0.13"
-  },
-  "bugs": {
-    "url": "https://github.com/manjula91/React_ReactNative_Redux/issues"
-  },
-  "homepage": "https://github.com/manjula91/React_ReactNative_Redux#readme"
+  }
 }
