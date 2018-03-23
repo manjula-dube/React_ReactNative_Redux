@@ -6,7 +6,7 @@ import home from './home'
 // Add here it is needed
 
 const initialReducer = {
-    home
+  home
 }
 
 // Combine all reducers using redux API
