@@ -1,13 +1,24 @@
-import { combineReducers } from 'redux'
+import { createStore, applyMiddleware, compose } from "redux"
 
-// App consists many pages and hence have multiple reducers/data-stores
-// All they need to be combined in single reducer/data-store
-import home from './home'
-// Add here it is needed
+import combinedReducer from "./combinedReducer"
 
-const initialReducer = {
-	home
+export default function configureStore(initialState = {}) {
+	/**
+	 * Apply middleware from routes
+	 */
+	const middlewares = applyMiddleware()
+
+	/**
+	 * Configure store using above middlewares
+	 */
+	const composeFunc = compose(
+		middlewares,
+		typeof window === "object" && typeof window.devToolsExtension !== "undefined"
+			? window.devToolsExtension()
+			: f => f
+	)
+
+	const store = createStore(combinedReducer(), initialState, composeFunc)
+
+	return store
 }
-
-// Combine all reducers using redux API
-export default combineReducers(initialReducer)
