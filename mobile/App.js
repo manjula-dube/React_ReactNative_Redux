@@ -3,6 +3,10 @@ import { StyleSheet, Text, View } from 'react-native'
 import { connect } from 'react-redux'
 
 export default class App extends React.Component {
+  updateInput = inputValue => {
+    this.setState({ inputValue })
+  }
+
   render () {
     return (
       <View style={styles.container}>
