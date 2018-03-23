@@ -7,15 +7,39 @@ import { setBusy, storeResult } from '../action'
 class UserForm extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { disabled: true, userName: '' }
+    this.state = { userName: '' }
     this.onSearchUserClick = this.onSearchUserClick.bind(this)
+    this.debounce = this.debounce.bind(this)
+    this.bouncer = this.debounce(this.autoTrigger, 300).bind(this)
   }
 
-  onChange (userName) {
-    let disabled = true
-    if (userName) disabled = false
-    this.setState({ disabled: disabled })
+  onInputChange (userName) {
     this.setState({ userName })
+
+    this.bouncer()
+  }
+
+  debounce (execFn, wait) {
+    let timer
+
+    return function (args) {
+      if (timer) {
+        clearTimeout(timer)
+      }
+
+      timer = setTimeout(() => {
+        execFn.apply(this, args)
+      }, wait)
+    }
+  }
+
+  autoTrigger () {
+    if (this.cancelTokenFn) {
+      this.cancelTokenFn()
+      this.cancelTokenFn = null
+    }
+    this.props.dispatch(setBusy(false))
+    this.onSearchUserClick()
   }
 
   onSearchUserClick () {
@@ -34,18 +58,11 @@ class UserForm extends React.Component {
     return (
       <div className='user-form'>
         <input
-          onChange={event => this.onChange(event.target.value)}
+          onChange={event => this.onInputChange(event.target.value)}
           type='text'
           placeholder='github username'
           value={this.state.userName}
                 />
-        <button
-          className={this.props.busy ? 'busy' : ''}
-          onClick={this.onSearchUserClick}
-          disabled={this.state.disabled}
-                >
-                    See profile
-                </button>
       </div>
     )
   }
