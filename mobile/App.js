@@ -1,8 +1,12 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, TextInput, View, Text } from 'react-native'
 import { connect } from 'react-redux'
 
 export default class App extends React.Component {
+  state = {
+    inputValue: ''
+  }
+
   updateInput = inputValue => {
     this.setState({ inputValue })
   }
@@ -10,11 +14,12 @@ export default class App extends React.Component {
   render () {
     return (
       <View style={styles.container}>
+        <Text style={styles.title}>Search Gihub</Text>
         <TextInput
           onChangeText={text => this.updateInput(text)}
           style={styles.input}
           value={this.state.inputValue}
-          placeholder='Name'
+          placeholder='Search github Users'
                 />
       </View>
     )
@@ -23,9 +28,18 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
+    marginTop: 20,
+    padding: 20
+  },
+  title: {
+    fontSize: 22,
+    textAlign: 'center'
+  },
+  input: {
+    backgroundColor: '#e4e4e4',
+    height: 55,
+    borderRadius: 3,
+    padding: 5,
+    marginTop: 12
   }
 })
