@@ -119,11 +119,14 @@ class Repositories extends Component {
 
 	renderPageSizeDropDown() {
 		return (
-			<select onChange={this.onPageSizeChange}>
-				{this.pageSizeOptions.map(option => {
-					return <option value={option}>{option}</option>
-				})}
-			</select>
+			<div>
+				<span>Number Of Entries per Page : </span>
+				<select className="select-option" onChange={this.onPageSizeChange}>
+					{this.pageSizeOptions.map(option => {
+						return <option value={option}>{option}</option>
+					})}
+				</select>
+			</div>
 		)
 	}
 
