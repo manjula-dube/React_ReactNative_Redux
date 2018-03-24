@@ -1,14 +1,15 @@
 import React from 'react'
-import { StyleSheet, TextInput, View, Text } from 'react-native'
 import { connect } from 'react-redux'
 
 import { get } from '../data-fetcher'
-import { storeResult } from '../action'
+import { setBusy, storeResult } from '../action'
+import { TextInput, View, StyleSheet } from 'react-native'
+import Header from './header'
 
-export default class UserSearch extends React.Component {
+class UserForm extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { inputValue: '' }
+    this.state = { userName: '' }
     this.onSearchUserClick = this.onSearchUserClick.bind(this)
     this.debounce = this.debounce.bind(this)
     this.bouncer = this.debounce(this.autoTrigger, 300).bind(this)
@@ -35,11 +36,22 @@ export default class UserSearch extends React.Component {
   }
 
   autoTrigger () {
+    if (this.cancelTokenFn) {
+      this.cancelTokenFn()
+      this.cancelTokenFn = null
+    }
+    this.props.dispatch(setBusy(false))
     this.onSearchUserClick()
   }
 
   onSearchUserClick () {
+    if (this.props.busy) {
+      return
+    }
+
+    this.props.dispatch(setBusy(true))
     get(`https://github-user.now.sh?username=${this.state.userName}`).then(data => {
+      this.props.dispatch(setBusy(false))
       this.props.dispatch(storeResult(data.data))
     })
   }
@@ -47,12 +59,12 @@ export default class UserSearch extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Search Gihub</Text>
+        <Header />
         <TextInput
-          onChangeText={event => this.onInputChange(event.target.value)}
-          style={styles.input}
-          value={this.state.inputValue}
-          placeholder='Search github Users'
+          style={{ height: 50, borderColor: 'gray', borderWidth: 1, marginTop: 40, padding: 20 }}
+          onChange={event => this.onInputChange(event.target.value)}
+          value={this.state.text}
+          placeholder='Search your github username'
                 />
       </View>
     )
@@ -61,18 +73,14 @@ export default class UserSearch extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
-    padding: 20
-  },
-  title: {
-    fontSize: 22,
-    textAlign: 'center'
-  },
-  input: {
-    backgroundColor: '#e4e4e4',
-    height: 55,
-    borderRadius: 3,
-    padding: 5,
-    marginTop: 12
+    flex: 1 // the master container has to be flex 1
   }
 })
+
+function mapStateToProps (state) {
+  return {
+    busy: state.home.busy
+  }
+}
+
+export default connect(mapStateToProps)(UserForm)
