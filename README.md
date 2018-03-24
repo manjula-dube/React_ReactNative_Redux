@@ -1,0 +1,1 @@
+Both web and mobile share the redux store 
