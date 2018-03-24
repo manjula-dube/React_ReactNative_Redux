@@ -50,7 +50,8 @@ class UserForm extends React.Component {
     }
 
     this.props.dispatch(setBusy(true))
-    get(`https://github-user.now.sh?username=${this.state.userName}`).then(data => {
+    get(`https://api.github.com/users/${this.state.userName}/repos`).then(data => {
+      console.log(data)
       this.props.dispatch(setBusy(false))
       this.props.dispatch(storeResult(data.data))
     })
@@ -63,7 +64,7 @@ class UserForm extends React.Component {
         <TextInput
           style={{ height: 50, borderColor: 'gray', borderWidth: 1, marginTop: 40, padding: 20 }}
           onChange={event => this.onInputChange(event.target.value)}
-          value={this.state.text}
+          value={this.state.userName}
           placeholder='Search your github usernames'
                 />
       </View>
