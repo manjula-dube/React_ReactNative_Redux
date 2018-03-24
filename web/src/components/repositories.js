@@ -125,7 +125,7 @@ class Repositories extends Component {
 				let x = a[key].toLowerCase()
 				let y = b[key].toLowerCase()
 
-				if (!asec) {
+				if (asec) {
 					const temp = x
 					x = y
 					y = temp
@@ -140,7 +140,7 @@ class Repositories extends Component {
 				let x = new Date(a[key]).getTime()
 				let y = new Date(b[key]).getTime()
 
-				if (!asec) {
+				if (asec) {
 					const temp = x
 					x = y
 					y = temp
