@@ -41,10 +41,9 @@ class Repositories extends Component {
   }
 
   render () {
-    console.log('dkewfew' + this.props.repoDetail)
     return (
       <View>
-        <FlatList data={this.props.repoDetail} renderItem={this.renderItem} />
+        <FlatList keyExtractor={item => item.id} data={this.props.repoDetail} renderItem={this.renderItem} />
       </View>
     )
   }
@@ -52,10 +51,12 @@ class Repositories extends Component {
 
 const styles = StyleSheet.create({
   reporow: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    padding: 10
   },
   repocolumn: {
-    flexDirection: 'column'
+    flexDirection: 'column',
+    padding: 10
   }
 })
 
