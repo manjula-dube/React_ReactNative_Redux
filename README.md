@@ -1,4 +1,8 @@
-The below project is build using react & react native
+#### The below project is has 2 apps
+
+----app1 (mobile)
+----app2 (web)
+----(redux) which is shared for both of them 
 
 Both web and mobile share the redux store 
 
