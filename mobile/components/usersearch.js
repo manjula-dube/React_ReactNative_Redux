@@ -5,11 +5,12 @@ import { get } from '../data-fetcher'
 import { setBusy, storeResult } from '../action'
 import { TextInput, View, StyleSheet } from 'react-native'
 import Header from './header'
+import Repositories from './repositories'
 
 class UserForm extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { userName: '' }
+    this.state = { userName: '', data: {} }
     this.onSearchUserClick = this.onSearchUserClick.bind(this)
     this.debounce = this.debounce.bind(this)
     this.bouncer = this.debounce(this.autoTrigger, 300).bind(this)
@@ -51,7 +52,7 @@ class UserForm extends React.Component {
 
     this.props.dispatch(setBusy(true))
     get(`https://api.github.com/users/${this.state.userName}/repos`).then(data => {
-      console.log(data)
+      console.log(this.state.userName)
       this.props.dispatch(setBusy(false))
       this.props.dispatch(storeResult(data.data))
     })
@@ -62,11 +63,12 @@ class UserForm extends React.Component {
       <View style={styles.container}>
         <Header />
         <TextInput
-          style={{ height: 50, borderColor: 'gray', borderWidth: 1, marginTop: 40, padding: 20 }}
-          onChange={event => this.onInputChange(event.target.value)}
+          style={{ height: 80, borderColor: 'gray', borderWidth: 1, marginTop: 40, padding: 10 }}
+          onChange={event => this.onInputChange(event.nativeEvent.text)}
           value={this.state.userName}
-          placeholder='Search your github usernames'
+          placeholder='Search your github usernamess'
                 />
+        <Repositories />
       </View>
     )
   }
