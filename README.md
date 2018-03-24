@@ -6,12 +6,14 @@
 
 Both web and mobile share the redux store 
 
-** Since we are sharing redux store between mobile and web we have created redux-store as node_modules
+### Since we are sharing redux store between mobile and web we have created redux-store as node_modules
 ------------------------------------------------------------------------------------------------------
 
-`For running web & mobile use `sh start.sh` & then install the dependencies in the respective folder`
+For running web & mobile use `sh start.sh` & then install the dependencies in the respective folder
 
-##Features:
+### The start.sh file links the redux-store and is used as node_modules in web & mobile
+
+### Features:
 
 - Used create react app for web
 - Link to common store
@@ -23,11 +25,11 @@ Both web and mobile share the redux store
 
 ### Used create react native app for mobile 
 - Link to common store
--  Call github Api
+- Call github Api
 - Search github information repo for input github username
--  Have a date generated in `<FlatList/>` View
+- Have a date generated in frontend using `<FlatList/>` View (without design)
 
-###Bonus:
+### Bonus:
 - Used eslint 
 
 To start the web & mobile server use `npm start`
