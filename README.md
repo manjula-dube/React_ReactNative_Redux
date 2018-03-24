@@ -1,6 +1,6 @@
 Both web and mobile share the redux store 
 
-For running web use sh start.sh & then install the dependencies in the respective folder
+`For running web & mobile use `sh start.sh` & then install the dependencies in the respective folder`
 
 For running mobile version install the dependencies
 
