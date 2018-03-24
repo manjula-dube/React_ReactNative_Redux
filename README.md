@@ -2,7 +2,7 @@
 
 ----app1 (mobile)
 ----app2 (web)
-----(redux) which is shared for both of them 
+----(redux) which is shared for both of both & web 
 
 Both web and mobile share the redux store 
 
