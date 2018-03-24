@@ -5,6 +5,7 @@ import { get } from '../data-fetcher'
 import { setBusy, storeResult } from '../action'
 import { TextInput, View, StyleSheet } from 'react-native'
 import Header from './header'
+import Repositories from './repositories'
 
 class UserForm extends React.Component {
   constructor (props) {
@@ -67,7 +68,7 @@ class UserForm extends React.Component {
           value={this.state.userName}
           placeholder='Search your github usernamess'
                 />
-
+        <Repositories />
       </View>
     )
   }

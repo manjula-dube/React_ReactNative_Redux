@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { FlatList } from 'react-native'
 
 const Repo = props => (
   <div className='repo-row'>
@@ -20,70 +21,31 @@ class Repositories extends Component {
   constructor () {
     super()
 
-    this.pageSizeOptions = [5, 10, 15, 20, 25, 50, 100]
-
     this.state = {
       currentPage: 1,
       pageSize: 5
     }
   }
 
-  calculateMinMax () {
-    const { currentPage } = this.state
-    const { pageSize } = this.state
-
-    const minIndex = (currentPage - 1) * pageSize, maxIndex = minIndex + pageSize
-
-    return { minIndex, maxIndex }
-  }
-
-  renderTable () {
-    const { repoDetail } = this.props
-
-    const { minIndex, maxIndex } = this.calculateMinMax()
-
-    if (repoDetail.repos) {
-      return repoDetail.repos
-                .slice(minIndex, maxIndex)
-                .map((repo, index) => (
-                  <Repo
-                    key={repo.id}
-                    id={repo.id}
-                    name={repo.name}
-                    stargazers_count={repo.stargazers_count}
-                    url={repo.url}
-                    created_at={repo.created_at}
-                    stars={repo.stars}
-                    owner={repo.owner.login}
-                    />
-                ))
-    } else {
-      return null
-    }
+  renderItem ({ item, index }) {
+    return (
+      <Repo
+        key={item.id}
+        id={item.id}
+        name={item.name}
+        stargazers_count={item.stargazers_count}
+        url={item.url}
+        created_at={item.created_at}
+        stars={item.stars}
+        owner={item.owner.login}
+            />
+    )
   }
 
   render () {
-    return (
-      <div className='section repositories repo-table'>
-        <RepoHeader />
-        {this.renderTable()}
-      </div>
-    )
+    return <FlatList data={this.state.repoDetail} renderItem={this.renderItem} />
   }
 }
-
-const RepoHeader = props => (
-  <div className='repo-row'>
-    <div className='repo-cell'>ID</div>
-
-    <div className='repo-cell'>Repo Title</div>
-
-    <div className='repo-cell'>Owner</div>
-
-    <div className='repo-cell'>Stars</div>
-    <div className='repo-cell'>Created At</div>
-  </div>
-)
 
 function mapStateToProps (state) {
   return {
