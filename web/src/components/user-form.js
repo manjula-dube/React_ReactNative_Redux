@@ -34,10 +34,6 @@ class UserForm extends React.Component {
 	}
 
 	autoTrigger() {
-		if (this.cancelTokenFn) {
-			this.cancelTokenFn()
-			this.cancelTokenFn = null
-		}
 		this.props.dispatch(setBusy(false))
 		this.onSearchUserClick()
 	}
