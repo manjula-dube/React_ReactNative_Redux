@@ -20,29 +20,37 @@ class Repositories extends Component {
 	constructor() {
 		super()
 
-		this.PAGE_SIZE = 5
+		this.pageSizeOptions = [5, 10, 15, 20, 25, 50, 100]
 
 		this.state = {
 			currentPage: 1,
+			pageSize: 5,
 		}
 
 		this.onPageClick = this.onPageClick.bind(this)
+		this.onPageSizeChange = this.onPageSizeChange.bind(this)
+	}
+
+	onPageSizeChange(event) {
+		this.setState({
+			pageSize: +event.target.value,
+		})
 	}
 
 	onPageClick(event) {
 		event.persist()
 		const currentPage = event.currentTarget.getAttribute("data-index")
 		this.setState({
-			currentPage,
+			currentPage: +currentPage,
 		})
 	}
 
 	calculateMinMax() {
 		const { currentPage } = this.state
-		const { PAGE_SIZE } = this
+		const { pageSize } = this.state
 
-		const minIndex = (currentPage - 1) * PAGE_SIZE,
-			maxIndex = minIndex + PAGE_SIZE
+		const minIndex = (currentPage - 1) * pageSize,
+			maxIndex = minIndex + pageSize
 
 		return { minIndex, maxIndex }
 	}
@@ -73,17 +81,23 @@ class Repositories extends Component {
 	}
 
 	renderControlBar() {
-		const maxPage = this.getMaxPages()
+		const maxPage = this.getMaxPages(),
+			{ currentPage } = this.state
 
 		return (
-			<div>
+			<div className="pagination">
 				{Array(maxPage)
 					.join("|")
 					.split("|")
 					.map((item, index) => {
+						const selectedPageClass = index + 1 === currentPage ? "selected" : ""
 						return (
-							<span data-index={index + 1} onClick={this.onPageClick}>
-								{index + 1}{" "}
+							<span
+								className={`page-index ${selectedPageClass}`}
+								data-index={index + 1}
+								onClick={this.onPageClick}
+							>
+								{index + 1}
 							</span>
 						)
 					})}
@@ -92,16 +106,31 @@ class Repositories extends Component {
 	}
 
 	getMaxPages() {
-		if (this.props.repoDetail.repos && this.props.repoDetail.repos.length) {
-			return parseInt(this.props.repoDetail.repos.length / this.PAGE_SIZE) + 1
+		const { repos } = this.props.repoDetail,
+			{ pageSize } = this.state
+		if (repos && repos.length) {
+			// repos.length % pageSize && 1
+			// If repo count is exactly divisble by page size , no need to add page
+			return parseInt(repos.length / pageSize) + (repos.length % pageSize && 1)
 		} else {
 			return 0
 		}
 	}
 
+	renderPageSizeDropDown() {
+		return (
+			<select onChange={this.onPageSizeChange}>
+				{this.pageSizeOptions.map(option => {
+					return <option value={option}>{option}</option>
+				})}
+			</select>
+		)
+	}
+
 	render() {
 		return (
 			<div className="section repositories repo-table">
+				{this.renderPageSizeDropDown()}
 				<RepoHeader />
 				{this.renderTable()}
 				{this.renderControlBar()}
