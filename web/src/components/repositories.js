@@ -25,10 +25,68 @@ class Repositories extends Component {
 		this.state = {
 			currentPage: 1,
 			pageSize: 5,
+			columnKey: "stargazers_count",
 		}
 
 		this.onPageClick = this.onPageClick.bind(this)
 		this.onPageSizeChange = this.onPageSizeChange.bind(this)
+		this.sortByID = this.columnHander.bind(this, "id")
+		this.sortByRepoTitle = this.columnHander.bind(this, "name")
+		this.sortByOwner = this.columnHander.bind(this, "owner")
+		this.sortByStars = this.columnHander.bind(this, "stargazers_count")
+		this.sortByCreatedAt = this.columnHander.bind(this, "created_at")
+		this.setAsec = this.setAsec.bind(this)
+		this.setDesc = this.setDesc.bind(this)
+
+		this.columns = [
+			{
+				name: "ID",
+				key: "id",
+				handler: this.sortByID,
+			},
+			{
+				name: "Repo Title",
+				key: "name",
+				handler: this.sortByRepoTitle,
+			},
+			{
+				name: "Owner",
+				key: "owner",
+				handler: this.sortByOwner,
+			},
+			{
+				name: "Stars",
+				key: "stargazers_count",
+				handler: this.sortByStars,
+			},
+			{
+				name: "Created At",
+				key: "created_at",
+				handler: this.sortByCreatedAt,
+			},
+		]
+	}
+
+	setAsec() {
+		const { columnKey } = this.state
+
+		this.setState({
+			[columnKey]: true,
+		})
+	}
+
+	setDesc() {
+		const { columnKey } = this.state
+
+		this.setState({
+			[columnKey]: false,
+		})
+	}
+
+	columnHander(columnKey) {
+		this.setState({
+			columnKey,
+		})
 	}
 
 	onPageSizeChange(event) {
@@ -55,13 +113,56 @@ class Repositories extends Component {
 		return { minIndex, maxIndex }
 	}
 
+	sortResult(repos, key) {
+		const asec = this.state[key]
+
+		switch (key) {
+		case "id":
+		case "stargazers_count":
+			return repos.sort((a, b) => (asec ? b[key] - a[key] : a[key] - b[key]))
+		case "name":
+			return repos.sort((a, b) => {
+				let x = a[key].toLowerCase()
+				let y = b[key].toLowerCase()
+
+				if (!asec) {
+					const temp = x
+					x = y
+					y = temp
+				}
+
+				const result = x < y ? -1 : 1
+
+				return x === y ? 0 : result
+			})
+		case "created_at":
+			return repos.sort((a, b) => {
+				let x = new Date(a[key]).getTime()
+				let y = new Date(b[key]).getTime()
+
+				if (!asec) {
+					const temp = x
+					x = y
+					y = temp
+				}
+
+				const result = x < y ? -1 : 1
+
+				return x === y ? 0 : result
+			})
+		default:
+			return repos
+		}
+	}
+
 	renderTable() {
 		const { repoDetail } = this.props
-
+		const { columnKey } = this.state
 		const { minIndex, maxIndex } = this.calculateMinMax()
 
 		if (repoDetail.repos) {
-			return repoDetail.repos
+			const sortedResult = this.sortResult(repoDetail.repos, columnKey)
+			return sortedResult
 				.slice(minIndex, maxIndex)
 				.map((repo, index) => (
 					<Repo
@@ -71,7 +172,6 @@ class Repositories extends Component {
 						stargazers_count={repo.stargazers_count}
 						url={repo.url}
 						created_at={repo.created_at}
-						stars={repo.stars}
 						owner={repo.owner.login}
 					/>
 				))
@@ -130,30 +230,35 @@ class Repositories extends Component {
 		)
 	}
 
+	renderHeader() {
+		return (
+			<div className="repo-row">
+				{this.columns.map(column => {
+					return (
+						<div className="repo-cell" onClick={column.handler}>
+							{column.name}
+							<div className="arrow-container">
+								<div className="asec" onClick={this.setDesc} />
+								<div className="desc" onClick={this.setAsec} />
+							</div>
+						</div>
+					)
+				})}
+			</div>
+		)
+	}
+
 	render() {
 		return (
 			<div className="section repositories repo-table">
 				{this.renderPageSizeDropDown()}
-				<RepoHeader />
+				{this.renderHeader()}
 				{this.renderTable()}
 				{this.renderControlBar()}
 			</div>
 		)
 	}
 }
-
-const RepoHeader = props => (
-	<div className="repo-row">
-		<div className="repo-cell">ID</div>
-
-		<div className="repo-cell">Repo Title</div>
-
-		<div className="repo-cell">Owner</div>
-
-		<div className="repo-cell">Stars</div>
-		<div className="repo-cell">Created At</div>
-	</div>
-)
 
 function mapStateToProps(state) {
 	return {
