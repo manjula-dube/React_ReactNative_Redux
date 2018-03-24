@@ -1,3 +1,5 @@
+The below project is build using react & react native
+
 Both web and mobile share the redux store 
 
 `For running web & mobile use `sh start.sh` & then install the dependencies in the respective folder`
