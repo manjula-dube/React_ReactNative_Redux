@@ -6,9 +6,10 @@
 
 Both web and mobile share the redux store 
 
-`For running web & mobile use `sh start.sh` & then install the dependencies in the respective folder`
+** Since we are sharing redux store between mobile and web we have created redux-store as node_modules
+------------------------------------------------------------------------------------------------------
 
-For running mobile version install the dependencies
+`For running web & mobile use `sh start.sh` & then install the dependencies in the respective folder`
 
 ### Used create react app for web
 

@@ -43,7 +43,7 @@ class Repositories extends Component {
   }
 
   render () {
-    return <FlatList data={this.state.repoDetail} renderItem={this.renderItem} />
+    return <FlatList data={this.props.repoDetail} renderItem={this.renderItem} />
   }
 }
 
