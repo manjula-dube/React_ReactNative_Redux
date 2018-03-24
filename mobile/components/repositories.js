@@ -1,20 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { FlatList } from 'react-native'
+import { View, FlatList, Text, StyleSheet } from 'react-native'
 
 const Repo = props => (
-  <div className='repo-row'>
-    <div className='repo-cell'>
-      <a className='name' href={props.url}>
-        {props.id}
-      </a>
-    </div>
-    <div className='stars repo-cell'>{props.name}</div>
-    <div className='stars repo-cell'>{props.owner}</div>
-    <div className='stars repo-cell'>{props.stargazers_count}</div>
-    <div className='stars repo-cell'>{new Date(props.created_at).toDateString()}</div>
-    <div className='clear' />
-  </div>
+  <View style={styles.reporow}>
+    <Text style={styles.repocolumn}>
+      {props.id}
+    </Text>
+    <Text style={styles.repocolumn}>{props.name}</Text>
+    <Text style={styles.repocolumn}>{props.owner}</Text>
+    <Text style={styles.repocolumn}>{props.stargazers_count}</Text>
+    <Text style={styles.repocolumn}>{new Date(props.created_at).toDateString()}</Text>
+    <Text className='clear' />
+  </View>
 )
 
 class Repositories extends Component {
@@ -43,9 +41,23 @@ class Repositories extends Component {
   }
 
   render () {
-    return <FlatList data={this.props.repoDetail} renderItem={this.renderItem} />
+    console.log('dkewfew' + this.props.repoDetail)
+    return (
+      <View>
+        <FlatList data={this.props.repoDetail} renderItem={this.renderItem} />
+      </View>
+    )
   }
 }
+
+const styles = StyleSheet.create({
+  reporow: {
+    flexDirection: 'row'
+  },
+  repocolumn: {
+    flexDirection: 'column'
+  }
+})
 
 function mapStateToProps (state) {
   return {
