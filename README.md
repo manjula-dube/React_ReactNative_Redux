@@ -21,6 +21,7 @@ For running web & mobile use `sh start.sh` & then install the dependencies in th
 - Search github information repo for input github username
 - Have a table generated view
 - Pagination
+- Sorting
 
 
 ### Used create react native app for mobile 
