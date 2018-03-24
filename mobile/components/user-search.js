@@ -2,7 +2,10 @@ import React from 'react'
 import { StyleSheet, TextInput, View, Text } from 'react-native'
 import { connect } from 'react-redux'
 
-export default class App extends React.Component {
+import { get } from '../data-fetcher'
+import { storeResult } from '../action'
+
+export default class UserSearch extends React.Component {
   constructor (props) {
     super(props)
     this.state = { inputValue: '' }
