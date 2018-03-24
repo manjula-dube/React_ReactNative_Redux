@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 const UserInfo = ({ repoDetail }) => (
   <div className='section user-info'>
-    <img className='avatar' src={repoDetail.avatar} />
+    <img className='avatar' src={repoDetail.avatar_url} />
     <a className='name' href={repoDetail.url}>
       {repoDetail.name}
     </a>

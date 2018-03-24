@@ -5,7 +5,7 @@ export default class Header extends React.Component {
   render () {
     return (
       <View style={styles.PinContainer}>
-        <Text style={styles.PinText}>Search Github Username</Text>
+        <Text style={styles.PinText}>Search Github Username's</Text>
       </View>
     )
   }
@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#C0C0C0',
     justifyContent: 'center',
     flexDirection: 'row',
-    padding: 20,
-    marginTop: 18
+    padding: 20
   }
 })

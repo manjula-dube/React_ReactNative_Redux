@@ -64,7 +64,7 @@ class UserForm extends React.Component {
           style={{ height: 50, borderColor: 'gray', borderWidth: 1, marginTop: 40, padding: 20 }}
           onChange={event => this.onInputChange(event.target.value)}
           value={this.state.text}
-          placeholder='Search your github username'
+          placeholder='Search your github usernames'
                 />
       </View>
     )
