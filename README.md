@@ -1,4 +1,4 @@
-#### The below project is has 2 apps
+#### The below project has 2 apps
 
 ----app1 (mobile)
 ----app2 (web)
